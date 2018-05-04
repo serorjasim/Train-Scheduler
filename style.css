@@ -13,3 +13,13 @@ body {
   background: black;
   color: white;
 }
+
+#the-schedule {
+  width: 80%;
+  margin: 0px auto;
+}
+
+#train-information {
+  width: 80%;
+  margin: 20px auto;
+}
