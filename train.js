@@ -15,19 +15,19 @@ $("#add-employee-btn").on("click", function(event) {
   event.preventDefault();
 
   // Grabs user input
-  var empName = $("#employee-name-input")
+  var empName = $("#train-name-input")
     .val()
     .trim();
-  var empRole = $("#role-input")
+  var empRole = $("#destination-input")
     .val()
     .trim();
   var empStart = moment(
-    $("#start-input")
+    $("#first-train-input")
       .val()
       .trim(),
     "DD/MM/YY"
   ).format("X");
-  var empRate = $("#rate-input")
+  var empRate = $("#frequency-input")
     .val()
     .trim();
 
@@ -52,10 +52,10 @@ $("#add-employee-btn").on("click", function(event) {
   alert("Employee successfully added");
 
   // Clears all of the text-boxes
-  $("#employee-name-input").val("");
-  $("#role-input").val("");
-  $("#start-input").val("");
-  $("#rate-input").val("");
+  $("#train-name-input").val("");
+  $("#destination-input").val("");
+  $("#first-train-input").val("");
+  $("#frequency-input").val("");
 });
 
 // 3. Create Firebase event for adding employee to the database and a row in the html when a user adds an entry
@@ -87,7 +87,7 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   console.log(empBilled);
 
   // Add each train's data into the table
-  $("#employee-table > tbody").append(
+  $("#train-table > tbody").append(
     "<tr><td>" +
       empName +
       "</td><td>" +
