@@ -1,73 +1,113 @@
 var config = {
-  apiKey: "AIzaSyBuYayypa6fprKzrNKspCJhoTXABwoZvW4",
-  authDomain: "timesheet-d7b77.firebaseapp.com",
-  databaseURL: "https://timesheet-d7b77.firebaseio.com",
-  projectId: "timesheet-d7b77",
+  apiKey: "AIzaSyDc1ACkJLsuZadkJieHcZ1GoyLEcO_rpv0",
+  authDomain: "train-project-cdd9e.firebaseapp.com",
+  databaseURL: "https://train-project-cdd9e.firebaseio.com",
+  projectId: "train-project-cdd9e",
   storageBucket: "",
-  messagingSenderId: "395890372675"
+  messagingSenderId: "598290953557"
 };
 firebase.initializeApp(config);
 
 var database = firebase.database();
 
-// Initial Values
-var name = "";
-var role = "";
-var startDate = "01/01/2001";
-var startFormat = "MM/DD/YYYY";
-var monthlyRate = 0;
-var monthsWorked = 0;
-var totalBilled = "";
-
-// Capture Button Click
-$("#add-user").on("click", function(event) {
+// 2. Button for adding Employees
+$("#add-employee-btn").on("click", function(event) {
   event.preventDefault();
 
-  name = $("#name-input")
+  // Grabs user input
+  var empName = $("#employee-name-input")
     .val()
     .trim();
-  role = $("#role-input")
+  var empRole = $("#role-input")
     .val()
     .trim();
-  startDate = moment(
+  var empStart = moment(
     $("#start-input")
       .val()
-      .trim()
-  ).format("MM/DD/YYYY");
-  monthlyRate = $("#rate-input")
+      .trim(),
+    "DD/MM/YY"
+  ).format("X");
+  var empRate = $("#rate-input")
     .val()
     .trim();
-  var convertedDate = moment(startDate, startFormat);
-  monthsWorked = Math.abs(moment(convertedDate).diff(moment(), "months"));
-  totalBilled = "$ " + monthlyRate * monthsWorked;
 
-  database.ref().push({
-    name: name,
-    role: role,
-    start: startDate,
-    months: monthsWorked,
-    rate: monthlyRate,
-    total: totalBilled,
-    dateAdded: firebase.database.ServerValue.TIMESTAMP
-  });
+  // Creates local "temporary" object for holding employee data
+  var newEmp = {
+    name: empName,
+    role: empRole,
+    start: empStart,
+    rate: empRate
+  };
+
+  // Uploads employee data to the database
+  database.ref().push(newEmp);
+
+  // Logs everything to console
+  console.log(newEmp.name);
+  console.log(newEmp.role);
+  console.log(newEmp.start);
+  console.log(newEmp.rate);
+
+  // Alert
+  alert("Employee successfully added");
+
+  // Clears all of the text-boxes
+  $("#employee-name-input").val("");
+  $("#role-input").val("");
+  $("#start-input").val("");
+  $("#rate-input").val("");
 });
-database.ref().on("child_added", function(childSnapshot) {
+
+// 3. Create Firebase event for adding employee to the database and a row in the html when a user adds an entry
+database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   console.log(childSnapshot.val());
 
-  //Add Employee Info into the table
-  $("#maintable").append(
-    "<tr><td scope='row'>" +
-      childSnapshot.val().name +
-      "</td><td scope='row'>" +
-      childSnapshot.val().role +
-      "</td><td scope='row'>" +
-      childSnapshot.val().start +
-      "</td><td scope='row'>" +
-      monthsWorked +
-      "</td><td scope='row'>" +
-      childSnapshot.val().rate +
-      "</td><td scope='row'>" +
-      totalBilled +
+  // Store everything into a variable.
+  var empName = childSnapshot.val().name;
+  var empRole = childSnapshot.val().role;
+  var empStart = childSnapshot.val().start;
+  var empRate = childSnapshot.val().rate;
+
+  // Employee Info
+  console.log(empName);
+  console.log(empRole);
+  console.log(empStart);
+  console.log(empRate);
+
+  // Prettify the employee start
+  var empStartPretty = moment.unix(empStart).format("MM/DD/YY");
+
+  // Calculate the months worked using hardcore math
+  // To calculate the months worked
+  var empMonths = moment().diff(moment(empStart, "X"), "months");
+  console.log(empMonths);
+
+  // Calculate the total billed rate
+  var empBilled = empMonths * empRate;
+  console.log(empBilled);
+
+  // Add each train's data into the table
+  $("#employee-table > tbody").append(
+    "<tr><td>" +
+      empName +
+      "</td><td>" +
+      empRole +
+      "</td><td>" +
+      empStartPretty +
+      "</td><td>" +
+      empMonths +
+      "</td><td>" +
+      empRate +
+      "</td><td>" +
+      empBilled +
       "</td></tr>"
   );
 });
+
+// Example Time Math
+// -----------------------------------------------------------------------------
+// Assume Employee start date of January 1, 2015
+// Assume current date is March 1, 2016
+
+// We know that this is 15 months.
+// Now we will create code in moment.js to confirm that any attempt we use meets this test case
