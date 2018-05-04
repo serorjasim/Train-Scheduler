@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Train Scheduler</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+</head>
+
+<body>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Employee Data Management</h1>
+            <h4 class="sub-title">A Comprehensive Directory of Employee Billable Hours</h4>
+        </div>
+    </div>
+
+    <div id="tableholder">
+        <table class="table">
+            <thead>
+                <h1>Current Employees</h1>
+                <tr id="table-headers" style.css>
+                    <th scope="col">Employee Name</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">Months Worked</th>
+                    <th scope="col">Monthly Rate($)</th>
+                    <th scope="col">Total Billed($)</th>
+                </tr>
+            </thead>
+            <tbody id="maintable">
+            </tbody>
+        </table>
+    </div>
+    <div id="formHolder">
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="name-input">Employee Name</label>
+                    <input type="text" class="form-control" id="name-input">
+                </div>
+
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="role-input">Role</label>
+                    <input type="text" class="form-control" id="role-input">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="start-input">Start Date (MM/DD/YYYY - ex: 01/01/1989)</label>
+                    <input type="text" class="form-control" id="start-input">
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="rate-input">Monthly Rate</label>
+                    <input type="text" class="form-control" id="rate-input">
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="add-user">Submit</button>
+        </form>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="train.js"></script>
+
+</body>
+
+</html>
