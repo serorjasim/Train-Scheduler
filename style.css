@@ -23,11 +23,17 @@ body {
 #the-schedule {
   width: 80%;
   margin: 0px auto;
-  text-align: center;
+  background: gray;
+  color: white;
 }
 
 #train-information {
   width: 80%;
   margin: 20px auto;
+  background: gray;
+  color: white;
+}
+
+.card-heading {
   text-align: center;
 }
