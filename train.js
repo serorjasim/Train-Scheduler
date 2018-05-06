@@ -27,12 +27,7 @@ $("#add-train-btn").on("click", function(event) {
   var destination = $("#destination-input")
     .val()
     .trim();
-  var firstTrain = moment(
-    $("#first-train-input")
-      .val()
-      .trim(),
-    "DD/MM/YY"
-  ).format("X");
+  var firstTrain = moment(userStartTime, "HH:mm").format("X");
   frequency = $("#frequency-input")
     .val()
     .trim();
