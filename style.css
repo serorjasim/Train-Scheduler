@@ -16,8 +16,8 @@ body {
   width: 80%;
   margin: 0px auto;
   text-align: center;
-  background: paleturquoise;
-  color: olive;
+  background: rgb(132, 10, 143);
+  color: whitesmoke;
 }
 
 #the-schedule {
@@ -28,7 +28,7 @@ body {
 }
 
 #train-information {
-  width: 80%;
+  width: 78%;
   margin: 20px auto;
   background: gray;
   color: white;
@@ -40,5 +40,5 @@ body {
 }
 
 .card-body {
-  color: maroon;
+  color: rgb(226, 171, 88);
 }

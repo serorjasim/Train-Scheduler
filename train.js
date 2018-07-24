@@ -13,24 +13,16 @@ var frequency;
 var userStartTime;
 
 // 2. Button for adding trains
-$("#add-train-btn").on("click", function(event) {
+$("#add-train-btn").on("click", function (event) {
   event.preventDefault();
 
-  userStartTime = $("#first-train-input")
-    .val()
-    .trim();
+  userStartTime = $("#first-train-input").val().trim();
 
   // Grabs user input
-  var trainName = $("#train-name-input")
-    .val()
-    .trim();
-  var destination = $("#destination-input")
-    .val()
-    .trim();
+  var trainName = $("#train-name-input").val().trim();
+  var destination = $("#destination-input").val().trim();
   var firstTrain = moment(userStartTime, "HH:mm").format("X");
-  frequency = $("#frequency-input")
-    .val()
-    .trim();
+  frequency = $("#frequency-input").val().trim();
 
   // Uploads train data to the database
   database.ref().push({
@@ -47,7 +39,7 @@ $("#add-train-btn").on("click", function(event) {
   $("#frequency-input").val("");
 });
 
-database.ref().on("child_added", function(childSnapshot, prevChildKey) {
+database.ref().on("child_added", function (childSnapshot, prevChildKey) {
   var startTimeAmPm = moment(childSnapshot.val().start, "X");
 
   var timeDifference = moment().diff(moment(startTimeAmPm), "minutes");
@@ -60,17 +52,8 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     .add(minutesAway, "minutes")
     .format("hh:mm A");
 
-  $("#main-table").append(
-    "<tr><td>" +
-      childSnapshot.val().name +
-      "</td><td>" +
-      childSnapshot.val().destination +
-      "</td><td>" +
-      childSnapshot.val().frequency +
-      "</td><td>" +
-      nextArrival +
-      "</td><td>" +
-      minutesAway +
-      "</td><td>"
+  $("#main-table").append("<tr><td>" + childSnapshot.val().name + "</td><td>" +
+    childSnapshot.val().destination + "</td><td>" + childSnapshot.val().frequency +
+    "</td><td>" + nextArrival + "</td><td>" + minutesAway + "</td><td>"
   );
 });
