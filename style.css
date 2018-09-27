@@ -4,7 +4,7 @@ html {
 
 body {
   min-height: 100%;
-  background: url("http://www.nationalgeographicexpeditions.com/assets/images/5129/hero-interior.jpg")
+  background: url("https://cdn-image.travelandleisure.com/sites/default/files/1537816203/austria-train-AUSTRAINS0918.jpg")
     no-repeat center center fixed;
   webkit-background-size: cover;
   moz-background-size: cover;
@@ -13,6 +13,7 @@ body {
 }
 
 .jumbotron {
+  opacity: 0.8;
   width: 80%;
   margin: 0px auto;
   text-align: center;
@@ -21,6 +22,7 @@ body {
 }
 
 #the-schedule {
+  opacity: 0.9;
   width: 80%;
   margin: 0px auto;
   background: gray;
@@ -28,6 +30,7 @@ body {
 }
 
 #train-information {
+  opacity: 0.9;
   width: 78%;
   margin: 20px auto;
   background: gray;
